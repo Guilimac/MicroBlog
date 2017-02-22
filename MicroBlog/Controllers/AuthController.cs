@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MicroBlog.ViewModels;
+using MicroBlog.DAL;
 
 namespace MicroBlog.Controllers
 {
@@ -15,6 +16,7 @@ namespace MicroBlog.Controllers
             if (TempData["Mensagem"] != null)
             {
                 ViewBag.Mensagem = TempData["Mensagem"];
+                
             }
             return View();
         }
@@ -27,7 +29,7 @@ namespace MicroBlog.Controllers
                 return View(user);
             }
             var teste = user;
-            Session["Usuario"] = user;
+            Session["Usuario"] = UserDAO.AddUser(user);
             TempData["Mensagem"] = "Usuário cadastrado com sucesso!";
             return RedirectToAction("Index","Home");
         }
